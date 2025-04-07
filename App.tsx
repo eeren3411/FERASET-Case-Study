@@ -9,16 +9,16 @@ import InputScreen from './screens/InputScreen';
 const Stack = createNativeStackNavigator();
 
 export default () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="InputScreen"
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <Stack.Screen name="InputScreen" component={InputScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator
+				initialRouteName="InputScreen"
+				screenOptions={{
+					headerShown: false,
+				}}
+			>
+				<Stack.Screen name="InputScreen" component={InputScreen} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 };

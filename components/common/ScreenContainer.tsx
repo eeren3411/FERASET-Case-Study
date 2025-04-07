@@ -26,5 +26,6 @@ export default function ScreenContainer({ children, style }: ScreenContainerProp
 const styles = StyleSheet.create({
 	gradient: {
 		flex: 1,
+		paddingHorizontal: 24
 	}
 });
