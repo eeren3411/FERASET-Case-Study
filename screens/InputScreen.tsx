@@ -176,7 +176,7 @@ const InputScreen = ({ navigation }: any) => {
 			</View>
 			<View style={styles.footer}>
 				<TouchableOpacity
-					disabled={status == 1}
+					disabled={status == 1 || prompt.length == 0}
 					style={styles.generateButton}
 					activeOpacity={0.6}
 					onPress={handleGenerate}
