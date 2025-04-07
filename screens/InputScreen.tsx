@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
 	StyleSheet,
 	View,	
@@ -49,6 +49,21 @@ const LogoStyles: StyleItem[] = [
 
 const InputScreen = ({ navigation }: any) => {
 	const [status, setStatus] = useState(0);
+	const [slideAnim, setSlideAnim] = useState(new Animated.Value(-50));
+
+	useEffect(() => {
+		if (status == 0) {
+			setSlideAnim(new Animated.Value(-30));
+			return;
+		}
+
+		Animated.timing(slideAnim, {
+			toValue: 0,
+			duration: 200,
+			useNativeDriver: true
+		}).start()
+	}, [status])
+
 	const renderChip = () => {
 		switch (status) {
 			case 1:
@@ -75,6 +90,7 @@ const InputScreen = ({ navigation }: any) => {
 	const handleGenerate = () => {
 		setStatus(1);
 		setTimeout(() => setStatus(2), 5000);
+		setTimeout(() => setStatus(0), 10000);
 	}
 
 	return (
@@ -83,7 +99,9 @@ const InputScreen = ({ navigation }: any) => {
 				<Text style={styles.headerText}>AI Logo</Text>
 			</View>
 			<View style={styles.body}>
-				{renderChip()}
+				<Animated.View style={{ transform: [{ translateY: slideAnim }] }}>
+					{renderChip()}
+				</Animated.View>
 				<View style={styles.promptBox}>
 					<View style={styles.promptHeader}>
 						<Text style={styles.promptHeaderText}>Enter Your Prompt</Text>
@@ -96,6 +114,7 @@ const InputScreen = ({ navigation }: any) => {
 					</View>
 					<View style={[styles.promptInputBox, promptFocused && styles.promptInputBoxOnFocus]}>
 						<TextInput 
+							readOnly={status == 1}
 							style={[styles.input]}
 							onFocus={() => setPromptFocused(true)}
 							onBlur={() => setPromptFocused(false)}
@@ -119,7 +138,7 @@ const InputScreen = ({ navigation }: any) => {
 						showsHorizontalScrollIndicator={false}
 						renderItem={({ item, index }) => (
 							<TouchableOpacity
-								disabled={index === selectedStyle}
+								disabled={index === selectedStyle || status != 0}
 								onPress={() => setSelectedStyle(index)}
 							>
 								<LogoStyle
@@ -135,6 +154,7 @@ const InputScreen = ({ navigation }: any) => {
 			</View>
 			<View style={styles.footer}>
 				<TouchableOpacity
+					disabled={status == 1}
 					style={styles.generateButton}
 					activeOpacity={0.6}
 					onPress={handleGenerate}
