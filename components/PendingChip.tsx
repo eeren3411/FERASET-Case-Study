@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ChipBase from './common/chipBase';
+import ChipBase from './common/ChipBase';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 
 export default function PendingChip() {

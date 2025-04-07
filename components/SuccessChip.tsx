@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import ChipBase from './common/chipBase';
+import ChipBase from './common/ChipBase';
 import { Image, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 

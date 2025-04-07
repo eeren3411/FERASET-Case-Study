@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ChipBase from './common/chipBase';
+import ChipBase from './common/ChipBase';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 
 import Icon from 'react-native-vector-icons/FontAwesome6'
