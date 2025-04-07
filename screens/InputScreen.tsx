@@ -89,8 +89,10 @@ const InputScreen = ({ navigation }: any) => {
 
 	const handleGenerate = () => {
 		setStatus(1);
-		setTimeout(() => setStatus(2), 5000);
-		setTimeout(() => setStatus(0), 10000);
+		setTimeout(() => {
+			setStatus(2);
+			navigation.navigate('OutputScreen');
+		}, 5000);
 	}
 
 	return (
