@@ -2,11 +2,13 @@ import React from 'react';
 import { View, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
 
 type ChipBaseProps = {
+	containerStyle?: ViewStyle;
 	icon: React.ReactNode;
 	iconContainerStyle?: ViewStyle;
 	title: string;
+	titleStyle?: TextStyle;
 	subtitle: string;
-	containerStyle?: ViewStyle;
+	subtitleStyle?: TextStyle;
 	onPress?: () => void;
 };
 
@@ -14,7 +16,9 @@ export default function ChipBase({
 	icon,
 	iconContainerStyle,
 	title,
+	titleStyle,
 	subtitle,
+	subtitleStyle,
 	containerStyle,
 	onPress,
 }: ChipBaseProps) {
@@ -24,8 +28,8 @@ export default function ChipBase({
 				{icon}
 			</View>
 			<View style={styles.textContainer}>
-				<Text style={styles.title}>{title}</Text>
-				<Text style={styles.subtitle}>{subtitle}</Text>
+				<Text style={[styles.title, titleStyle]}>{title}</Text>
+				<Text style={[styles.subtitle, subtitleStyle]}>{subtitle}</Text>
 			</View>
 		</View>
 	);
@@ -34,14 +38,13 @@ export default function ChipBase({
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
-		borderRadius: 8,
+		borderRadius: 16,
 		overflow: 'hidden',
 		alignItems: 'center',
-		backgroundColor: 'white',
 	},
 	iconContainer: {
-		width: 60,
-		height: 60,
+		width: 70,
+		height: 70,
 		alignItems: 'center',
 		justifyContent: 'center'
 	},
@@ -52,10 +55,8 @@ const styles = StyleSheet.create({
 	title: {
 		fontWeight: '600',
 		fontSize: 16,
-		color: '#000',
 	},
 	subtitle: {
-		fontSize: 12,
-		color: '#666',
+		fontSize: 13,
 	},
 });
