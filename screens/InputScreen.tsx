@@ -112,6 +112,10 @@ const InputScreen = ({ navigation }: any) => {
 		}).catch((e) => {
 			console.log(e);
 			setStatus(-1);
+
+			setTimeout(() => {
+				setStatus(0);
+			}, 3000)
 		})
 	}
 
@@ -161,7 +165,7 @@ const InputScreen = ({ navigation }: any) => {
 						showsHorizontalScrollIndicator={false}
 						renderItem={({ item, index }) => (
 							<TouchableOpacity
-								disabled={index === selectedStyle || status != 0}
+								disabled={index === selectedStyle || status === 1}
 								onPress={() => setSelectedStyle(index)}
 							>
 								<LogoStyle
