@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 
 type ScreenContainerProps = {
@@ -15,9 +16,9 @@ export default function ScreenContainer({ children, style }: ScreenContainerProp
 			end={{ x: 0, y: 0.5 }}
 			style={styles.gradient}
 		>
-			<View style={style}>
+			<SafeAreaView style={style}>
 				{children}
-			</View>
+			</SafeAreaView>
 		</LinearGradient>
 	);
 }
