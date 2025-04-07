@@ -131,7 +131,7 @@ const InputScreen = ({ navigation }: any) => {
 				<View style={styles.promptBox}>
 					<View style={styles.promptHeader}>
 						<Text style={styles.promptHeaderText}>Enter Your Prompt</Text>
-						<TouchableOpacity onPress={handleSurprise}>
+						<TouchableOpacity disabled={status == 1} onPress={handleSurprise}>
 							<View style={styles.promptHeaderSurprise}>
 								<Text style={styles.promptHeaderSurpriseText}>🎲</Text>
 								<Text style={styles.promptHeaderSurpriseText}>Surprise Me</Text>
