@@ -12,7 +12,7 @@ module.exports = function (api) {
 			  '@components': './components',
 			  '@styles': './styles',
 			  '@assets': './assets',
-			  '@firebase': './firebase',
+			  '@myFirebase': './firebase',
 			},
 		  },
 		],
