@@ -143,6 +143,7 @@ const InputScreen = ({ navigation }: any) => {
 							multiline={true}
 							textAlignVertical='top'
 							placeholder='A blue lion logo reading ‘HEXA’ in bold letters'
+							placeholderTextColor={'#71717A'}
 							value={prompt}
 							onChangeText={setPrompt}
 							maxLength={maxLength}
@@ -207,7 +208,6 @@ const styles = StyleSheet.create({
 	},
 	body: {
 		gap: 24,
-		paddingVertical: 12,
 		flexGrow: 1
 	},
 	promptBox: {
@@ -248,6 +248,7 @@ const styles = StyleSheet.create({
 		color: '#FAFAFA',
 		height: '100%',
 		paddingTop: 0,
+		fontSize: 16
 	},
 	characterCounter: {
 		color: '#71717A',
