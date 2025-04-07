@@ -8,6 +8,8 @@ import {
 	Image,
 } from 'react-native'
 
+import { useRoute } from '@react-navigation/native'
+
 import { commonStyles } from "@styles/common";
 
 import ScreenContainer from "@components/common/ScreenContainer";
@@ -16,6 +18,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import OctiCons from "react-native-vector-icons/Octicons";
 
 export default function OutputScreen({ navigation }: any) {
+	const route = useRoute();
+	const { entryId, imgUrl, prompt, style } = route.params as {
+		entryId: string;
+		imgUrl: string;
+		prompt: string;
+		style: string;
+	  };
+
 	return <ScreenContainer style={commonStyles.container}>
 		<View style={styles.header}>
 			<Text style={styles.headerText}>Your Design</Text>
@@ -27,7 +37,7 @@ export default function OutputScreen({ navigation }: any) {
 		</View>
 		<View style={styles.body}>
 			<Image
-				source={require('@assets/mock_logo.png')}
+				source={{ uri: imgUrl }}
 				style={styles.image}
 				resizeMode="cover"
 			/>
@@ -39,9 +49,9 @@ export default function OutputScreen({ navigation }: any) {
 						<Text style={styles.infoHeaderCopyText}>Copy</Text>
 					</View>
 				</View>
-				<Text style={styles.infoText}>Lorem ipsum dolor sit amet</Text>
+				<Text style={styles.infoText}>{prompt}</Text>
 				<View style={styles.infoLabel}>
-					<Text style={styles.infoLabelText}>Monogram</Text>
+					<Text style={styles.infoLabelText}>{style}</Text>
 				</View>
 			</View>
 		</View>

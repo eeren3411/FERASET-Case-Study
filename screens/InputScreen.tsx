@@ -9,7 +9,9 @@ import {
 	Animated
  } from 'react-native';
 
- import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from 'expo-linear-gradient';
+
+import { createEntry, listen } from '@myFirebase/controller';
 
 import ScreenContainer from '@components/common/ScreenContainer';
 
@@ -64,19 +66,6 @@ const InputScreen = ({ navigation }: any) => {
 		}).start()
 	}, [status])
 
-	const renderChip = () => {
-		switch (status) {
-			case 1:
-				return <PendingChip />;
-			case 2:
-				return <SuccessChip />;
-			case -1:
-				return <ErrorChip />;
-			default:
-				return null
-		}
-	}
-
 	const [promptFocused, setPromptFocused] = useState(false);
 	const [prompt, setPrompt] = useState('');
 	const maxLength = 500;
@@ -87,12 +76,43 @@ const InputScreen = ({ navigation }: any) => {
 
 	const [selectedStyle, setSelectedStyle] = useState(0);
 
+	const [timeRemaining, setTimeRemaining] = useState(0);
+
+	const renderChip = () => {
+		switch (status) {
+			case 1:
+				return <PendingChip time={timeRemaining} />;
+			case 2:
+				return <SuccessChip />;
+			case -1:
+				return <ErrorChip />;
+			default:
+				return null
+		}
+	}
+
 	const handleGenerate = () => {
-		setStatus(1);
-		setTimeout(() => {
-			setStatus(2);
-			navigation.navigate('OutputScreen');
-		}, 5000);
+		createEntry({ prompt: prompt, style: LogoStyles[selectedStyle].caption }).then(id => {
+			setStatus(1)
+			
+			const unsub = listen(id, (data) => {
+				setTimeRemaining(data.remainingTime);
+
+				if (data.imgUrl) {
+					setStatus(2);
+					navigation.navigate('OutputScreen', { 
+						entryId: id,
+						imgUrl: data.imgUrl,
+						prompt: data.prompt,
+						style: data.style
+					});
+					unsub();
+				}
+			})
+		}).catch((e) => {
+			console.log(e);
+			setStatus(-1);
+		})
 	}
 
 	return (
